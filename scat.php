@@ -1,3 +1,57 @@
+<?php
+if (isset($_POST['submit'])) {
+
+    //make conncetion to database
+    $conn = new mysqli('localhost', 'root', '', 'ge');
+    //insert all the values into the database
+
+    $sql = "SELECT * FROM `sem` WHERE `sn_num` = '$sn_num'";
+
+    $scat_scrap_desc = "";
+    $scat_date = "";
+    if (!empty($_POST['scat_po_number'])) {
+        $po_number = $_POST['scat_po_number'];
+    }
+    if (!empty($_POST['scat_scat_date'])) {
+        $scat_date = $_POST['scat_scat_date'];
+    }
+
+    $po_number = "";
+    if (!empty($_POST['scat_po_number'])) {
+        $po_number = $_POST['scat_po_number'];
+    }
+
+    //check if the sn_num is already in the database
+
+    $result = $conn->query($sql);
+
+
+    if ($result) {
+        //check if po number is not empty
+        //update 
+        $sql = "";
+        if (empty($po_number)) {
+            $sql = "UPDATE `sem` SET 
+            `scat_scrap_desc`='$scat_scrap_desc',
+            `scat_date`='$scat_date' WHERE `sn_num` = '$sn_num'";
+        } else {
+            $sql = "UPDATE `sem` SET 
+            `po_number`='$po_number',
+            `scat_scrap_desc`='$scat_scrap_desc',
+            `scat_date`='$scat_date' WHERE `sn_num` = '$sn_num'";
+        }
+
+        if ($conn->query($sql) === TRUE) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+    }
+}
+
+
+?>
+
 <div class="tab-pane fade" id="scat_details">
     <div class="panel panel-default">
         <div class="panel-heading">SCAT Details</div>
@@ -44,7 +98,7 @@
             <div class="form-group">
                 <label>SCAT SCRAP</label>
                 <input type="checkbox" id="myCheck" onclick="myFunction()">
-                <input type="text" name="scat_scrap_desc" class="form-control" id="scat_scrap_desc" style="display:none" />
+                <input type="text" id="scat_scrap_desc" name="scat_scrap_desc" class="form-control" id="scat_scrap_desc" style="display:none" />
             </div>
             <br />
             <div align="center">

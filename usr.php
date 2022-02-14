@@ -1,3 +1,52 @@
+<?php
+if (isset($_POST['submit'])) {
+
+    //make conncetion to database
+    $conn = new mysqli('localhost', 'root', '', 'ge');
+    //insert all the values into the database
+
+    $sql = "SELECT * FROM `sem` WHERE `sn_num` = '$sn_num'";
+
+
+    //usr_repair
+    $usr_date = "";
+    if (!empty($_POST['usr_usr_date'])) {
+        $usr_date = $_POST['usr_usr_date'];
+    }
+
+
+    $po_number = "";
+    if (!empty($_POST['usr_po_number'])) {
+        $po_number = $_POST['usr_po_number'];
+    }
+
+    //check if the sn_num is already in the database
+
+    $result = $conn->query($sql);
+
+
+    if ($result) {
+        //check if po number is not empty
+        //update 
+        $sql = "";
+        if (empty($po_number)) {
+            $sql = "UPDATE `sem` SET 
+            `usr_date`='$usr_date' WHERE `sn_num` = '$sn_num'";
+        } else {
+            $sql = "UPDATE `sem` SET 
+            `po_number`='$po_number',
+            `usr_date`='$usr_date' WHERE `sn_num` = '$sn_num'";
+        }
+
+        if ($conn->query($sql) === TRUE) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+    }
+}
+?>
+
 <div class="tab-pane fade" id="usr_details">
     <div class="panel panel-default">
         <div class="panel-heading">USR Details</div>

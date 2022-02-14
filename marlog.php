@@ -1,3 +1,52 @@
+<?php
+if (isset($_POST['submit'])) {
+
+    //make conncetion to database
+    $conn = new mysqli('localhost', 'root', '', 'ge');
+    //insert all the values into the database
+
+    $sql = "SELECT * FROM `sem` WHERE `sn_num` = '$sn_num'";
+
+    //marlog
+    $marlog_date = "";
+    $po_number = "";
+    if (!empty($_POST['marlog_po_number'])) {
+        $po_number = $_POST['marlog_po_number'];
+    }
+    if (!empty($_POST['marlog_marlog_date'])) {
+        $marlog_date = $_POST['marlog_marlog_date'];
+    }
+    //check if the sn_num is already in the database
+
+    $result = $conn->query($sql);
+
+
+    if ($result) {
+        //check if po number is not empty
+        //update 
+        $sql = "";
+        if (empty($po_number)) {
+            $sql = "UPDATE `sem` SET 
+            `marlog_date`='$marlog_date' WHERE `sn_num` = '$sn_num'";
+        } else {
+            $sql = "UPDATE `sem` SET 
+            `po_number`='$po_number',
+            `marlog_date`='$marlog_date' WHERE `sn_num` = '$sn_num'";
+        }
+
+        if ($conn->query($sql) === TRUE) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+    }
+}
+
+
+?>
+
+
+
 <div class="tab-pane fade" id="marlog_details">
     <div class="panel panel-default">
         <div class="panel-heading">MARLOG Details</div>

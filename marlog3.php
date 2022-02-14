@@ -1,3 +1,48 @@
+<?php
+if (isset($_POST['submit'])) {
+
+    //make conncetion to database
+    $conn = new mysqli('localhost', 'root', '', 'ge');
+    //insert all the values into the database
+
+    $sql = "SELECT * FROM `sem` WHERE `sn_num` = '$sn_num'";
+
+
+    $marlog3 = "";
+    if (!empty($_POST['marlog3_scrap_marlog3_scrap_repair_date'])) {
+        $marlog2_pass_date = $_POST['marlog3_scrap_marlog3_scrap_repair_date'];
+    }
+
+    $po_number = "";
+    if (!empty($_POST['marlog3_scrap_po_number'])) {
+        $po_number = $_POST['marlog3_scrap_po_number'];
+    }
+    //check if the sn_num is already in the database
+
+    $result = $conn->query($sql);
+
+    if ($result) {
+        //check if po number is not empty
+        //update 
+        $sql = "";
+        if (empty($po_number)) {
+            $sql = "UPDATE `sem` SET 
+            `marlog3`='$marlog3' WHERE `sn_num` = '$sn_num'";
+        } else {
+            $sql = "UPDATE `sem` SET 
+            `po_number`='$po_number',
+            `marlog3`='$marlog3' WHERE `sn_num` = '$sn_num'";
+        }
+
+        if ($conn->query($sql) === TRUE) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+    }
+}
+?>
+
 <div class="tab-pane fade" id="marlog3_scrap_details">
     <div class="panel panel-default">
         <div class="panel-heading">USR Repair Details</div>

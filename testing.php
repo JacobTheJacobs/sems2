@@ -1,3 +1,60 @@
+<?php
+if (isset($_POST['submit'])) {
+
+    //make conncetion to database
+    $conn = new mysqli('localhost', 'root', '', 'ge');
+    //insert all the values into the database
+
+    $sql = "SELECT * FROM `sem` WHERE `sn_num` = '$sn_num'";
+
+
+    //testing
+    $testing_fail_desc = "";
+    $testing_date = "";
+    if (!empty($_POST['testing_fail_desc'])) {
+        $testing_date = $_POST['testing_testing_date'];
+    }
+    if (!empty($_POST['testing_fail_description'])) {
+        $testing_fail_desc = $_POST['testing_fail_description'];
+    }
+
+
+    $po_number = "";
+    if (!empty($_POST['testing_po_number'])) {
+        $po_number = $_POST['testing_po_number'];
+    }
+
+    //check if the sn_num is already in the database
+
+    $result = $conn->query($sql);
+
+
+    if ($result) {
+        //check if po number is not empty
+        //update 
+        $sql = "";
+        if (empty($po_number)) {
+            $sql = "UPDATE `sem` SET 
+            `testing_fail_desc`='$testing_fail_desc',
+            `testing_date`='$testing_date' WHERE `sn_num` = '$sn_num'";
+        } else {
+            $sql = "UPDATE `sem` SET 
+            `po_number`='$po_number',
+            `testing_fail_desc`='$testing_fail_desc',
+            `testing_date`='$testing_date' WHERE `sn_num` = '$sn_num'";
+        }
+
+        if ($conn->query($sql) === TRUE) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+    }
+}
+
+
+?>
+
 <div class="tab-pane fade" id="testing_details">
     <div class="panel panel-default">
         <div class="panel-heading">Testing Details</div>

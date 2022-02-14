@@ -1,3 +1,49 @@
+<?php
+if (isset($_POST['submit'])) {
+
+    //make conncetion to database
+    $conn = new mysqli('localhost', 'root', '', 'ge');
+    //insert all the values into the database
+
+    $sql = "SELECT * FROM `sem` WHERE `sn_num` = '$sn_num'";
+
+
+    $marlog2_pass_date = "";
+    if (!empty($_POST['marlog2_pass_marlog2_date'])) {
+        $marlog2_pass_date = $_POST['marlog2_pass_marlog2_date'];
+    }
+
+    $po_number = "";
+    if (!empty($_POST['marlog2_pass_po_number'])) {
+        $po_number = $_POST['marlog2_pass_po_number'];
+    }
+    //check if the sn_num is already in the database
+
+    $result = $conn->query($sql);
+
+    if ($result) {
+        //check if po number is not empty
+        //update 
+        $sql = "";
+        if (empty($po_number)) {
+            $sql = "UPDATE `sem` SET 
+            `marlog2_pass_date`='$marlog2_pass_date' WHERE `sn_num` = '$sn_num'";
+        } else {
+            $sql = "UPDATE `sem` SET 
+            `po_number`='$po_number',
+            `marlog2_pass_date`='$marlog2_pass_date' WHERE `sn_num` = '$sn_num'";
+        }
+
+        if ($conn->query($sql) === TRUE) {
+            echo "New record created successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+        }
+    }
+}
+?>
+
+
 <div class="tab-pane fade" id="marlog2_pass_details">
     <div class="panel panel-default">
         <div class="panel-heading">MARLOG 2 Details</div>
@@ -9,7 +55,7 @@
             </div>
             <div class="form-group">
                 <label>Sem PO Number</label>
-                <input type="text" name="marlog2_po_number" id="marlog2_po_number" class="form-control" />
+                <input type="text" name="marlog2_pass_po_number" id="marlog2_pass_po_number" class="form-control" />
                 <span id="error_po" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -54,7 +100,7 @@
                 <?php
                 $a = date("Y-m-d");
                 ?>
-                <input type="date" name="marlog2_marlog2_date" id="marlog2_marlog2_date" class="form-control" value="<?php echo $a ?>" />
+                <input type="date" name="marlog2_pass_marlog2_date" id="marlog2_pass_marlog2_date" class="form-control" value="<?php echo $a ?>" />
                 <span id="error_date" class="text-danger"></span>
             </div>
 

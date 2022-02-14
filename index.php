@@ -1,22 +1,6 @@
 <?php
 if (isset($_POST['submit'])) {
-    //grps
-    $sn_num = $_POST['gprs_sn_number'];
-    $po_num = $_POST['po_number'];
-    $gprs_description = $_POST['gprs_description'];
-    $gprs_date = $_POST['gprs_date'];
-
-    //marlog
-    $po_num = $_POST['marlog_po_number'];
-    $gprs_description = $_POST['marlog_gprs_description'];
-    $gprs_date = $_POST['marlog_gprs_date'];
-    $marlog_date = $_POST['marlog_marlog_date'];
-
-    //scat
-
 }
-
-
 
 ?>
 
@@ -167,43 +151,35 @@ if (isset($_POST['submit'])) {
 
     $(document).ready(function(e) {
 
-        let sn_number;
-        let gprs_gprs_date;
 
+        let sn_number;
         //------------------------------------------------------GPRS------------------------------------------------------
         $('#btn_gprs_details_next').click(function(e) {
             e.preventDefault();
             var error_sn = '';
             var error_date = '';
 
-            //check if gprs_gprs_date is not empty and less than today Date
-            gprs_gprs_date = $('#gprs_gprs_date').val();
-            var gprs_Date = new Date(gprs_gprs_date);
-            var today = new Date();
-            var dd = today.getDate();
-            var mm = today.getMonth() + 1; //January is 0!
-            var yyyy = today.getFullYear();
-            console.log(gprs_gprs_date, "picked");
-            console.log(yyyy + '-' + mm + '-' + dd, "today");
-            console.log(gprs_gprs_date > yyyy + '-' + mm + '-' + dd);
 
             if ($.trim($('#gprs_sn_number').val()).length == 0) {
                 error_sn = 'Sem Number is required';
                 $('#error_sn').text(error_sn);
                 $('#gprs_sn_number').addClass('has-error');
 
-            } else if (gprs_Date > yyyy + '-' + mm + '-' + dd) {
-                error_date = 'GPRS Date is not valid';
-                $('#error_gprs_gprs_date').text(error_date);
-                $('#gprs_gprs_date').addClass('has-error');
-                console.log(gprs_Date);
             } else {
-                //get the value of sn_number
                 sn_number = $('#gprs_sn_number').val();
-                //put the value into the marlog_sn_number
                 $('#marlog_sn_number').val(sn_number);
                 $('#scat_sn_number').val(sn_number);
             }
+
+            var valueDate = document.getElementById('gprs_gprs_date').value;
+
+            if (!Date.parse(valueDate)) {
+                error_date = 'Date is required';
+                $('#error_gprs_gprs_date').text(error_date);
+                $('#gprs_gprs_date').addClass('has-error');
+                return;
+            }
+
 
 
             if (error_sn != '') {
@@ -239,10 +215,6 @@ if (isset($_POST['submit'])) {
 
         $('#btn_marlog_details_next').click(function(e) {
             e.preventDefault();
-            var error_first_name = '';
-            var error_last_name = '';
-
-
             $('#marlog_details_tab').removeClass('active active_tab1');
             $('#marlog_details_tab').removeAttr('href data-toggle');
             $('#marlog_details').removeClass('active');
@@ -272,10 +244,6 @@ if (isset($_POST['submit'])) {
 
         $('#btn_scat_details_next').click(function(e) {
             e.preventDefault();
-            var error_first_name = '';
-            var error_last_name = '';
-
-
             $('#scat_details_tab').removeClass('active active_tab1');
             $('#scat_details_tab').removeAttr('href data-toggle');
             $('#scat_details').removeClass('active');
@@ -304,9 +272,6 @@ if (isset($_POST['submit'])) {
 
         $('#btn_testing_details_next').click(function(e) {
             e.preventDefault();
-            var error_first_name = '';
-            var error_last_name = '';
-
             if (checkBoxTesting.checked == true) {
                 $('#testing_details_tab').removeClass('active active_tab1');
                 $('#testing_details_tab').removeAttr('href data-toggle');
