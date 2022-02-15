@@ -26,15 +26,14 @@ if (isset($_POST['submit'])) {
         $sql = "";
         if (empty($po_number)) {
             $sql = "UPDATE `sem` SET 
-            `gprs2_date`='$gprs2_date' WHERE `sn_num` = '$sn_num'";
+            `grps2_date`='$gprs2_date' WHERE `sn_num` = '$sn_num'";
         } else {
             $sql = "UPDATE `sem` SET 
             `po_number`='$po_number',
-            `gprs2_date`='$gprs2_date' WHERE `sn_num` = '$sn_num'";
+            `grps2_date`='$gprs2_date' WHERE `sn_num` = '$sn_num'";
         }
 
         if ($conn->query($sql) === TRUE) {
-            echo "New record created successfully";
         } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
         }

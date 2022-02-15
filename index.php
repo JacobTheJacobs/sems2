@@ -87,6 +87,8 @@ if (isset($_POST['submit'])) {
                 <?php include 'usr_repair.php'; ?>
                 <!--MARLOG 3-->
                 <?php include 'marlog3.php'; ?>
+
+                <?php include 'search.php'; ?>
             </div>
         </form>
     </div>
