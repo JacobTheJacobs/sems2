@@ -4,97 +4,68 @@ if (isset($_POST['submit'])) {
 
 ?>
 
-<html>
+<?php include "inc/header.php"; ?>
 
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
-    <style>
-        .box {
-            width: 800px;
-            margin: 0 auto;
-        }
 
-        .active_tab1 {
-            background-color: #fff;
-            color: #333;
-            font-weight: 600;
-        }
 
-        .inactive_tab1 {
-            background-color: #f5f5f5;
-            color: #333;
-            cursor: not-allowed;
-        }
+<div class="container box">
+    <br />
+    <h2 align="center">MultiCutting Edge System For Inventory Mangment Of Sem Boards</h2><br />
+    <!--TABS-->
+    <form action="index.php" method="post" id="sems_form">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active_tab1" style="border:1px solid #ccc" id="gprs_details_tab">GPRS </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active_tab1" id="marlog_details_tab" style="border:1px solid #ccc">MARLOG </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active_tab1" id="scat_details_tab" style="border:1px solid #ccc">SCAT </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active_tab1" id="testing_details_tab" style="border:1px solid #ccc">Testing </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active_tab1" id="marlog2_details_tab" style="border:1px solid #ccc">MARLOG2 </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active_tab1" id="gprsusr_details_tab" style="border:1px solid #ccc">GRPS2/USR </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active_tab1" id="usr_repair_details_tab" style="border:1px solid #ccc">USR REPAIR </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active_tab1" id="marlog3_scrap_details_tab" style="border:1px solid #ccc">MARLOG3 </a>
+            </li>
+        </ul>
+        <!--GPRS DETAILS-->
+        <div class="tab-content" style="margin-top:16px;">
+            <?php include 'home/grps.php'; ?>
+            <!--MARLOG-->
+            <?php include 'home/marlog.php'; ?>
+            <!--SCAT-->
+            <?php include 'home/scat.php'; ?>
+            <!--Testing-->
+            <?php include 'home/testing.php'; ?>
+            <!--Marlog 2-->
+            <?php include 'home/marlog2_pass.php'; ?>
+            <?php include 'home/marlog2_fail.php'; ?>
+            <!--GRPS/USR-->
+            <?php include 'home/grps2.php'; ?>
+            <?php include 'home/usr.php'; ?>
+            <!--USR REPAIR-->
+            <?php include 'home/usr_repair.php'; ?>
+            <!--MARLOG 3-->
+            <?php include 'home/marlog3.php'; ?>
 
-        .has-error {
-            border-color: #cc0000;
-            background-color: #ffff99;
-        }
-    </style>
-</head>
+        </div>
+    </form>
+</div>
 
-<body>
-    <div class="container box">
-        <br />
-        <h2 align="center">MultiCutting Edge System For Inventory Mangment Of Sem Boards</h2><br />
-        <!--TABS-->
-        <form action="index.php" method="post" id="sems_form">
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a class="nav-link active_tab1" style="border:1px solid #ccc" id="gprs_details_tab">GPRS </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active_tab1" id="marlog_details_tab" style="border:1px solid #ccc">MARLOG </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active_tab1" id="scat_details_tab" style="border:1px solid #ccc">SCAT </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active_tab1" id="testing_details_tab" style="border:1px solid #ccc">Testing </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active_tab1" id="marlog2_details_tab" style="border:1px solid #ccc">MARLOG2 </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active_tab1" id="gprsusr_details_tab" style="border:1px solid #ccc">GRPS2/USR </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active_tab1" id="usr_repair_details_tab" style="border:1px solid #ccc">USR REPAIR </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active_tab1" id="marlog3_scrap_details_tab" style="border:1px solid #ccc">MARLOG3 </a>
-                </li>
-            </ul>
-            <!--GPRS DETAILS-->
-            <div class="tab-content" style="margin-top:16px;">
-                <?php include 'grps.php'; ?>
-                <!--MARLOG-->
-                <?php include 'marlog.php'; ?>
-                <!--SCAT-->
-                <?php include 'scat.php'; ?>
-                <!--Testing-->
-                <?php include 'testing.php'; ?>
-                <!--Marlog 2-->
-                <?php include 'marlog2_pass.php'; ?>
-                <?php include 'marlog2_fail.php'; ?>
-                <!--GRPS/USR-->
-                <?php include 'grps2.php'; ?>
-                <?php include 'usr.php'; ?>
-                <!--USR REPAIR-->
-                <?php include 'usr_repair.php'; ?>
-                <!--MARLOG 3-->
-                <?php include 'marlog3.php'; ?>
+<?php include "inc/footer.php"; ?>
 
-                <?php include 'search.php'; ?>
-            </div>
-        </form>
-    </div>
-</body>
 
-</html>
 
 <script>
     var checIfFailedUsr = document.getElementById("usr_check_failed");

@@ -30,18 +30,27 @@ if (isset($_POST['submit'])) {
     }
 }
 
-
 ?>
 
+<?php include "inc/header.php"; ?>
 
-<form action="" method="post">
-    <div class="input-group mb-3">
 
-        <input type="text" name="search">
+<div class="container box">
+    <br />
+    <h2 align="center">MultiCutting Edge System For Inventory Mangment Of Sem Boards</h2><br />
 
-        <div class="input-group-append">
-            <button class="btn btn-outline-secondary" type="submit" name="submit">Button</button>
+    <form action="" method="post" style="display: flex;
+justify-content: center;">
+        <div class="input-group mb-3">
+
+            <input type="text" name="search">
+
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit" name="submit">Button</button>
+            </div>
+
         </div>
+    </form>
+</div>
 
-    </div>
-</form>
+<?php include "inc/footer.php"; ?>
